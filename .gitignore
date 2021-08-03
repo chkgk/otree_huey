@@ -11,3 +11,6 @@ __pycache__/
 *.py[cod]
 .DS_Store
 *.otreezip
+*.db
+*.db-shm
+*.db-wal
