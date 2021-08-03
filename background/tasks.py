@@ -1,7 +1,7 @@
-from huey import SqliteHuey
+from huey import SqliteHuey, RedisHuey
 import time
 
-huey = SqliteHuey()
+huey = RedisHuey()
 
 @huey.task()
 def add(a, b):
