@@ -1,7 +1,9 @@
 from huey import SqliteHuey, RedisHuey
 import time
+import os
 
-huey = RedisHuey()
+REDIS_URL = os.environ.get("REDIS_URL")
+huey = RedisHuey(url=REDIS_URL)
 
 @huey.task()
 def add(a, b):
