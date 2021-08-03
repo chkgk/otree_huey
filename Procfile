@@ -1,2 +1,2 @@
 web: otree prodserver1of2
-worker: huey_consumer.py background.tasks.huey --verbose
+worker: huey_consumer.py background.tasks.huey
