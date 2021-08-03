@@ -1,0 +1,2 @@
+- run huey_consumer.py long_task_demo.huey --verbose
+- run otree devserver
