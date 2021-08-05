@@ -20,8 +20,8 @@
         
         // handle data coming from oTree
         function liveRecv(data) {
-            if (data['message'] === 'result') {
-                console.log('got a result, stop checking')
+            if (data['message'] === 'calculation_done') {
+                console.log('calculation done, stop checking')
                 clearInterval(interval_id);
                 // advance to next page
                 form.submit()

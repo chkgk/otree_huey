@@ -59,7 +59,7 @@ class Calculation(Page):
             if result:
                 # store the result
                 player.task_result = result
-                return {player.id_in_group: {'message': 'result', 'result': result}}
+                return {player.id_in_group: {'message': 'calculation_done'}}
 
 class Decision(Page):
     form_model = 'player'
