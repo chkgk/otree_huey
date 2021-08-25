@@ -1,0 +1,13 @@
+{{ block title }}
+    Results
+{{ endblock }}
+{{ block content }}
+
+    <p>Player's inputs were: {{ player.random_number1 }} and {{ player.random_number2 }}</p>
+    <p>The calculation result is: {{ player.task_result }}</p>
+    <p>Your decision was: {{ player.decision }}</p>
+
+    {{ next_button }}
+
+{{ endblock }}
+

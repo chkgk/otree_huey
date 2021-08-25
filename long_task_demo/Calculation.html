@@ -1,0 +1,32 @@
+{{ block title }}
+    Wait for Calculation
+{{ endblock }}
+{{ block content }}
+
+    <p>Player's inputs are: {{ player.random_number1 }} and {{ player.random_number2 }}</p>
+    <p>The task has been started. Please wait while the result is being calculated...</p>
+
+{{ endblock }}
+
+
+{{ block scripts }}
+    <script>
+        let form = document.getElementById('form');
+        let interval_sec = 1; // seconds between result checks
+        let interval_id = setInterval(function() {
+            liveSend({message: 'get_result'})
+            console.log('checking for a result...')
+        }, interval_sec * 1000);
+        
+        // handle data coming from oTree
+        function liveRecv(data) {
+            if (data['message'] === 'calculation_done') {
+                console.log('calculation done, stop checking')
+                clearInterval(interval_id);
+                // advance to next page
+                form.submit()
+            }
+        }
+        
+    </script>
+{{ endblock }}

@@ -22,9 +22,11 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     random_number1 = models.IntegerField()
     random_number2 = models.IntegerField()
+    
+    decision = models.BooleanField(choices=[(True, 'Yes'), (False, 'No')])
 
     task_result = models.IntegerField()
-    result_id = models.StringField()
+    result_id = models.StringField(default='')
 
 
 # fill the players with two random numbers as inputs for the long running task
@@ -35,13 +37,17 @@ def creating_session(subsession):
 
 
 # PAGES
-class MyPage(Page):
-    def live_method(player: Player, data):
-        if data['message'] == 'start':
-            # when the player clicks the start button, we start the long-running task and store its id
+class Calculation(Page):
+   
+    @staticmethod
+    def vars_for_template(player):
+        # if the task is not yet running, start it.
+        if not player.result_id:
             result = add(player.random_number1, player.random_number2)
             player.result_id = result.id
-
+            
+            
+    def live_method(player: Player, data):
         # the client will ask us for the result over and over again.
         # we check if it is unequal "none". If so, we got a result and can store and return it.
         if data['message'] == 'get_result':
@@ -53,7 +59,15 @@ class MyPage(Page):
             if result:
                 # store the result
                 player.task_result = result
-                return {player.id_in_group: {'message': 'result', 'result': result}}
+                return {player.id_in_group: {'message': 'calculation_done'}}
+
+class Decision(Page):
+    form_model = 'player'
+    form_fields = ['decision']
 
 
-page_sequence = [MyPage]
+class Results(Page):
+    pass
+
+
+page_sequence = [Calculation, Decision, Results]
