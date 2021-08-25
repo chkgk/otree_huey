@@ -7,7 +7,7 @@ REDIS_URL = os.environ.get("REDIS_URL", None)
 if not REDIS_URL:
     huey = SqliteHuey()
 else:
-    huey = RedisHuey(url=REDIS_URL, ssl_cert_reqs=None)
+    huey = RedisHuey(url=REDIS_URL)
 
 # Task definitions
 @huey.task()
