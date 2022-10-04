@@ -16,6 +16,3 @@ This allows to run long-running tasks in the background and communicate the resu
 - to run this on heroku, add the "redis" add-on
 - also turn on the second dyno for "worker"
 - optionally: install the "papertrail" add-on to monitor your log files.
-
-## Demo
-https://otree-huey.herokuapp.com
